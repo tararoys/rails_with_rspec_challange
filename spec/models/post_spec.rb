@@ -11,20 +11,25 @@ describe Post do
   # end
 
   it "title should be automatically titleized before save" do
-    post = Post.new(title: "new post", content: "A great story")
+    valid_params[:title] = 'new post'
+    #create a custom hash to pass in just what this test needs
+    #post = Post.new(@valid_params)
+
+    #merge operation overwrites specifiec things in a hash! 
+    post = Post.new(valid_params.merge(title: 'new post'))
     post.save
     expect(post.title).to eq("New Post")
   end
 
   it "post should be unpublished by default" do
-    post = Post.new(title: "new post", content: "A great story")
+    post = Post.new(valid_params)
     expect(post.is_published).to be_false
   end
 
   # a slug is an automaticaly generated url-friendly
   # version of the title
   it "slug should be automatically generated" do
-    post = Post.new(title: "New post!", content: "A great story")
+    post = Post.new(valid_params)
 
     expect(post.slug).to be_nil
     post.save
