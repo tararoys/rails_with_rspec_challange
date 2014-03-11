@@ -1,6 +1,15 @@
 require 'spec_helper'
 
 describe Post do
+
+  #lazy loaded variable. This only gets created if a test asks for it. 
+  let(:valid_params) {{title: "New post!", content: "A great story"}}
+
+  #creates an instance variable for each and every test in this suite.
+  # before do
+    # @valid_params = {title: "New post!", content: "A great story"}
+  # end
+
   it "title should be automatically titleized before save" do
     post = Post.new(title: "new post", content: "A great story")
     post.save
