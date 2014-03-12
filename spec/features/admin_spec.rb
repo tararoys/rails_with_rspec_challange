@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 feature 'Admin panel' do
+
   context "on admin homepage" do
     it "can see a list of recent posts" do
       Post.create(title: "Integration Tests Rock", content: "A great story")
@@ -57,7 +58,13 @@ feature 'Admin panel' do
   end
 
   context "on post show page" do
-    it "can visit a post show page by clicking the title"
+    it "can visit a post show page by clicking the title" do 
+        post = Post.create(title: "Integration Tests Rock", content: "A great story")
+        page.driver.browser.authorize 'geek', 'jock'
+        visit "/admin/posts"
+        click_link("Integration Tests Rock")
+        current_url.should eq post_url(post)
+    end
 
     it "can see an edit link that takes you to the edit post path"
 
