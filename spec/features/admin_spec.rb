@@ -30,7 +30,7 @@ feature 'Admin panel' do
       expect(page).to_not have_content "Integration Tests Rock"
     end
 
-    
+
     it "can create a new post and view it" do
        visit new_admin_post_url
 
@@ -48,8 +48,10 @@ feature 'Admin panel' do
 
   context "editing post" do
     it "can mark an existing post as unpublished" do
-      pending # remove this line when you're working on implementing this test
-
+      post = Post.create(title: "Integration Tests Rock", content: "A great story")
+      visit edit_admin_post_url(post)
+      page.uncheck('post_is_published')
+      click_button "Save"
       expect(page).to have_content "Published: false"
     end
   end
