@@ -22,7 +22,14 @@ feature 'Admin panel' do
       expect(post.reload.title).to eq('Hello World!')
     end
 
-    it "can delete a post by clicking the delete link next to a post" 
+    it "can delete a post by clicking the delete link next to a post" do 
+      post = Post.create(title: "Integration Tests Rock", content: "A great story")
+      visit admin_posts_url
+      save_and_open_page
+      click_link "Delete"
+      expect(page).to_not have_content "Integration Tests Rock"
+    end
+
     
     it "can create a new post and view it" do
        visit new_admin_post_url
