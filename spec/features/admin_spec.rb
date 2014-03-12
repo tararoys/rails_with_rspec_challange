@@ -3,18 +3,16 @@ require 'spec_helper'
 feature 'Admin panel' do
   context "on admin homepage" do
     it "can see a list of recent posts" do
-      post = Post.create(title: "Integration Tests Rock", content: "A great story")
-
-   
-      visit admin_posts_url #({ user: "geek", password: "jock" })
-
+      Post.create(title: "Integration Tests Rock", content: "A great story")
+      visit admin_posts_url 
       expect(page).to have_content "Integration Tests Rock" 
     end
 
-    it "can edit a post by clicking the edit link next to a post"
 
-    it "can delete a post by clicking the delete link next to a post"
+    it "can edit a post by clicking the edit link next to a post" 
 
+    it "can delete a post by clicking the delete link next to a post" 
+    
     it "can create a new post and view it" do
        visit new_admin_post_url
 
