@@ -9,7 +9,18 @@ feature 'Admin panel' do
     end
 
 
-    it "can edit a post by clicking the edit link next to a post" 
+    it "can edit a post by clicking the edit link next to a post" do 
+      post = Post.create(title: "Integration Tests Rock", content: "A great story")
+      
+      visit admin_posts_url
+      click_link "Edit"
+      # save_and_open_page  #wonderful method
+      expect(current_url).to eq(edit_admin_post_url(post))
+
+      fill_in 'post_title', with: "Hello World!"
+      click_button "Save"
+      expect(post.reload.title).to eq('Hello World!')
+    end
 
     it "can delete a post by clicking the delete link next to a post" 
     
